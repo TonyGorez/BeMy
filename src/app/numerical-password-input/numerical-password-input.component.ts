@@ -7,15 +7,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NumericalPasswordInputComponent implements OnInit {
 
-  onPassword(password: number) {
-    this.currentNumber = password;
-    console.log(this.currentNumber)
-  }
+  @Input()
+  userPassword: number;
+
   currentNumber: number;
 
-  constructor() { }
-
   ngOnInit() {
+  }
+
+  onPassword(password: number) {
+    this.currentNumber = password;
+    if (this.currentNumber === this.userPassword) {
+      alert("C'est le bon mot de passe !");
+    }
   }
 
 }

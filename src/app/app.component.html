@@ -1,6 +1,6 @@
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }} !
-    <app-numerical-password-input (onCurrentNumberChanged)="onPassword($event)"></app-numerical-password-input>
   </h1>
+  <app-numerical-password-input [userPassword]="123456789" ></app-numerical-password-input>
 </div>

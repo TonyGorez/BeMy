@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-randomized-numeric-input',
@@ -17,46 +17,24 @@ export class RandomizedNumericInputComponent implements OnInit {
 
   public randomize(): string[] {
     let shuffledArray = []
-    let arr = this.digits.slice();
+    let arrayTemp = this.digits.slice();
 
     do {
-      let rand = Math.floor(Math.random() * arr.length);
-      shuffledArray.push(arr[rand]);
-      arr.splice(rand, 1);
-    } while (arr.length);
+      let rand = Math.floor(Math.random() * arrayTemp.length);
+      shuffledArray.push(arrayTemp[rand]);
+      arrayTemp.splice(rand, 1);
+    } while (arrayTemp.length);
     return shuffledArray;
   }
-
-  constructor() { }
 
   ngOnInit() {
     this.digitRandom = this.randomize();
   }
 
   onClick(number: string) {
-    // erreur : si string vide ou plus de 9 digits
+    if (this.digitRandom[number] === ' ') return;
     this.currentNumberStr += this.digitRandom[number];
     this.currentNumber = parseInt(this.currentNumberStr);
     this.onCurrentNumberChanged.emit(this.currentNumber);
-    console.log(this.currentNumber)
   }
 }
-
-//
-// Dans le composant parent, pour recuperer la valleur de l'utilasteur recupere par ce composant:
-// <app-viewer [currentNumber]="334355"></app-viewer>
-// <random (onCurrentNumberChanged)="onPassword($event)"></random>()
-// <app-numerical-password-input (onCurrentNumberChanged)="onPassword($event)"></app-numerical-password-input>
-
-// onPassword(password: number) {
-//   console.log(password)
-//   this.currentNumber = password;
-// // }
-// <app-password-viewer [currentNumber]="currentNumber" ></app-password-viewer>
-// currentNumber: number;
-// 
-
-//
-// onNumber(number: string[]) {
-//   // passWord:
-// }
