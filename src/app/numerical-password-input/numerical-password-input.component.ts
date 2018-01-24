@@ -8,17 +8,21 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NumericalPasswordInputComponent implements OnInit {
 
   @Input()
-  userPassword: number;
+  userPassword: string;
 
-  currentNumber: number;
+  currentNumberStr: string = ''; 
 
   ngOnInit() {
   }
 
-  onPassword(password: number) {
-    this.currentNumber = password;
-    if (this.currentNumber === this.userPassword) {
+  onPassword(password: string) {
+    this.currentNumberStr = password;
+    if (this.currentNumberStr == this.userPassword) {
       alert("C'est le bon mot de passe !");
+      this.currentNumberStr = ''; 
+    } else if (this.currentNumberStr.length == 9) {
+      alert("Ce n'est pas le bon mot de passe !");
+      this.currentNumberStr = ''; 
     }
   }
 

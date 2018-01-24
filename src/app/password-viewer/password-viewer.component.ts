@@ -9,6 +9,8 @@ export class PasswordViewerComponent implements OnInit {
 
   @Input()
   currentNumber: number;
+  @Input()
+  currentNumberStr: string;
 
   ngOnInit() {
   }

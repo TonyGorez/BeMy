@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-randomized-numeric-input',
@@ -8,11 +8,13 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class RandomizedNumericInputComponent implements OnInit {
   private readonly digits = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ', ' ' ];
 
+  @Input()
+  currentNumberStr: string = ''; 
+
   @Output()
-  onCurrentNumberChanged = new EventEmitter<number>();
+  onCurrentNumberChanged = new EventEmitter<string>();
 
   public currentNumber: number;
-  public currentNumberStr: string = '';
   public digitRandom = []
 
   public randomize(): string[] {
@@ -34,7 +36,6 @@ export class RandomizedNumericInputComponent implements OnInit {
   onClick(number: string) {
     if (this.digitRandom[number] === ' ') return;
     this.currentNumberStr += this.digitRandom[number];
-    this.currentNumber = parseInt(this.currentNumberStr);
-    this.onCurrentNumberChanged.emit(this.currentNumber);
+    this.onCurrentNumberChanged.emit(this.currentNumberStr);
   }
 }
